@@ -1,0 +1,24 @@
+name: Verificacao do Projeto
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copiar o codigo para o servidor virtual
+      uses: actions/checkout@v4
+
+    - name: Verificar se o index.html existe
+      run: |
+        if [ -f index.html ]; then
+          echo "[+] Sucesso: index.html foi encontrado!"
+        else
+          echo "[-] Erro: index.html nao existe!"
+          exit 1
+        fi
